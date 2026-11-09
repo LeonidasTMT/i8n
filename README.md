@@ -30,6 +30,10 @@ Each subfolder is one engine family and contains:
 
 ## Ground rules that apply to every engine
 
+> **Above all: translate faithfully.** The author's script is ground truth and
+> you are not their editor — see [TRANSLATION.md](TRANSLATION.md) for the full
+> doctrine. Everything below assumes it.
+
 1. **Match the original byte-for-byte.** Change only what you intend to change;
    prove it with a diff, not by eye.
 2. **Respect the source encoding** (for JP games, almost always CP932/Shift-JIS,

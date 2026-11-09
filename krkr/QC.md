@@ -3,6 +3,11 @@
 The checklists to run, and the mistakes actually made on this project so they
 don't repeat. "Look out for" items are general JP→EN traps.
 
+> Meta-level QC first: **faithful translation** — the author's script is ground
+> truth; no silent edits, no register changes to names/terms, line structure
+> preserved. Full doctrine: [../TRANSLATION.md](../TRANSLATION.md). The checks below
+> catch the mechanical drift that doctrine prevents.
+
 ## Per-file QC checklist (run before shipping)
 
 - [ ] **Byte/line diff vs the original:** only intended lines changed; zero
