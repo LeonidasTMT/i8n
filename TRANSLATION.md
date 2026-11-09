@@ -77,9 +77,10 @@ until proven otherwise — and even then, **flag it**, don't silently change it.
 - Determine the antecedent from **context**: surrounding lines, who is speaking,
   what was just mentioned, and scene logic. Don't guess.
 - Watch the **"you" trap**: a line that *reads* like it's addressing "you" is often
-  actually about *it / he / she*, or an inanimate/abstract thing. Example:
-  "coming out" with no human subject is usually **"it's coming out"** (something
-  emerging / being revealed), not a person — *"you're coming out"* was the mistake.
+  actually about *it / he / she*, or an inanimate/abstract thing. Real case: a line I
+  rendered as *"you're coming out"* was actually 射精 (`detchau`, ejaculation) — i.e.,
+  **"it's coming out"** (semen), not a person. The surrounding scene made it
+  unambiguous; the error came from translating the line in isolation.
 - If the reference stays genuinely undecidable, prefer the reading consistent with
   scene logic and flag it; keep it as neutral/correct as possible.
 - Record resolved references in the character doc so they stay **consistent**
