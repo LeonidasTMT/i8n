@@ -16,9 +16,10 @@ Each subfolder is one engine family and contains:
 | Folder | Engine | Status |
 |--------|--------|--------|
 | [`krkr/`](krkr/) | **KiriKiri / KAG** (`.tjs` engine UI, `.ks` scenario, `.txt` story, `data.xp3`) | proven on a shipped patch |
+| [`unity/`](unity/) | **Unity / Mono** (managed DLL `#US` heap, asset bundles, baked images) | methodology; native-bake target vs live BepInEx |
 
-> More engines will be added as they're tackled (e.g. Ren'Py, Tyrano, MML,
-> Unity/Mono). The top level stays an index; each engine is self-contained.
+> More engines will be added as they're tackled (e.g. Ren'Py, Tyrano, MML).
+> The top level stays an index; each engine is self-contained.
 
 ## What this repo is / isn't
 
