@@ -6,6 +6,10 @@
 - **Byte-exactness**: per patched container, diff vs original shows ONLY intended
   strings changed; every referencing offset and content hash is consistent; round-trip
   verify each rebuilt `#US` stream / re-serialized asset.
+- **Line endings on canonical text tables**: before editing a canonical table (e.g.
+  `pairs.txt`), record its line-ending style — ikusei's canonical pairs.txt is CRLF,
+  and a default LF rewrite silently converts all 4,677 separators. Re-diff vs the
+  backup after writing: changed-line count must equal the intended edit count exactly.
 - **Coverage census**: in-game CJK census → 0 visible JP, except intentionally-baked
   art still pending the redraw pass. A string is "baked" iff it renders JP now AND was
   never observed as live text.
