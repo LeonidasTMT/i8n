@@ -128,6 +128,16 @@ desire clause) — what must match is whether the action is ongoing or one-shot.
 - Flattening 見てて ("keep looking") to a one-shot "Look at me." — or adding
   continuity the source doesn't have.
 
+## Review hand-offs: show verbatim, complete lines
+
+When you present source lines for human review (tables, dumps), quote them **complete
+and verbatim** — no trimming leading/trailing fragments to fit a cell. The reviewer
+works from *your* extraction and usually has no independent access to the source;
+a truncated JP cell reads as missing content. Real case: trimmed interjections
+`ん……っ……はぁ` and a leading `動かないで` fragment were both read as "not in the JP"
+— false flags on lines that were actually fine. If a line is too long for the medium,
+say what was cut or split it — never silently elide.
+
 ## When you disagree with the source
 
 Render it faithfully; don't be righter than the author. If a choice feels wrong,
