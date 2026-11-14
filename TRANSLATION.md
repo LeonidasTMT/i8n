@@ -69,6 +69,21 @@ until proven otherwise — and even then, **flag it**, don't silently change it.
 - The test: is the ambiguity **Japanese economy** (safe to resolve from context) or
   an **authorial device** (preserve)? Cutoffs, censor blocks, silence → leave them.
 
+## Verb form is meaning (imperative continuity)
+
+Japanese verb forms carry meaning that the English verb alone won't show:
+
+- **Bare imperative** (見て / 聞いて / 待って): a one-shot command —
+  "Look at me."
+- **Continuative te-form imperative** (見てて / 見えてて / 聞いてて): asks that the
+  action be *kept up* — "Keep looking... only at me." or "I want you to see only
+  me."
+
+Render the form, not just the verb. If the source uses the continuative te-form,
+don't flatten it to a one-shot command; if the source is bare, don't add
+continuity. The exact English shape is flexible ("keep + -ing", an explicit
+desire clause) — what must match is whether the action is ongoing or one-shot.
+
 ## Pronouns & references (the "you're" vs "it's" problem)
 
 - Japanese drops pronouns and leans on context; English forces you to name the
@@ -110,6 +125,8 @@ until proven otherwise — and even then, **flag it**, don't silently change it.
 - Re-flowing/re-wrapping lines to look nicer when the original breaks carry pacing intent.
 - Silently fixing a suspected typo; varying a repeated term for variety; rewriting awkward prose.
 - "Clarifying" an intentional cutoff/censor by filling in the withheld word.
+- Flattening 見てて ("keep looking") to a one-shot "Look at me." — or adding
+  continuity the source doesn't have.
 
 ## When you disagree with the source
 
