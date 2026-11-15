@@ -29,6 +29,10 @@ don't repeat. "Look out for" items are general JP→EN traps.
 
 - [ ] **Idempotent re-flow:** source from a clean pre-reflow backup, apply
       editorial fixes *before* wrapping. Never re-wrap already-wrapped text.
+- [ ] **Review-stage fixes go in as data.** User-proposed line edits get verified
+      one-by-one against the JP source before applying, then recorded in the build
+      script's `FIXES` list (JP source line commented) — never hand-edit re-flowed
+      output, so fixes survive rebuilds.
 - [ ] **NO-MATCH safety net** on every string-replacement pass (abort on miss).
 - [ ] **One named backup per stage** before each repack (`..._before_ks.xp3`,
       `..._before_tjs.xp3`). Cheap, and it's your rollback + diff baseline.
@@ -80,11 +84,21 @@ don't repeat. "Look out for" items are general JP→EN traps.
    (`krkr2`/`krkrz`) are third-party GPL and huge. Reference them by pointer for
    internals (e.g. `XP3Archive.cpp`); keep the i8n repo to small tools + docs.
 
-10. **Story fidelity is its own QC pass.** Speaker labels/attribution, character
+10. **Story fidelity is its own QC pass (two passes minimum).** Speaker labels/attribution, character
     names staying consistent, voice, and ellipsis convention each need a dedicated
-    read-through — separate from the byte-level checks above. (This project had a
-    full story-QC pass plus later targeted fixes: "Onlookers", "nodded", "It's
-    coming out", "coming at me"→"coming out".)
+    read-through — separate from the byte-level checks above. Expect at least two
+    passes: a full story-QC pass, then a user-review pass that catches what the
+    first missed (deictic errors, implicit-subject calques, register). Every such
+    fix gets verified against its JP source line and recorded as data in the build
+    script's `FIXES` list, not hand-applied to output.
+11. **Display names and save state outlive your patch.** Label display-name lines
+    (`*label|Name`), `System.title`, and menu captions get serialized into
+    bookmark/save files at save time, so old saves show pre-patch strings *after
+    loading*, even when every source file is translated. When a reported
+    untranslated string only appears after loading a save, check whether it comes
+    from serialized state (the save file) before re-translating anything — then
+    either rewrite the exact strings in the save's UTF-16LE TJS stream (see
+    WORKFLOW §8) or document that old saves keep old names until re-saved.
 
 ## Mistakes actually made (and the fix that stuck)
 
@@ -95,6 +109,19 @@ don't repeat. "Look out for" items are general JP→EN traps.
   verify against the known-good prior build, not ad-hoc string presence.
 - **Truncated codepoint dump** on a long line → re-dumped the full line before
   finalizing that replacement.
+- **CJK can arrive corrupted through the editing path, not just the terminal.**
+  A doc edit containing Japanese came back with silently substituted characters.
+  Rule: after any edit that introduces CJK, verify by codepoint dump of the file
+  on disk (compare against \uXXXX expectations), never by re-reading what you
+  think you wrote.
+- **Rewrote a save file's zlib payload without mapping the whole container.**
+  `datasc.ksd` has a 21-byte header that *declares* the compressed and
+  decompressed sizes; keeping the old header with a new stream made the engine
+  read past EOF → startup exception 「システム変数データが壊れています」.
+  Rule: before rewriting any binary save, dump the pre-stream bytes and identify
+  every declared length/checksum, update them all, verify by parsing exactly the
+  way the loader does, and boot-test the game (startup exceptions land in
+  `savedata/krkr.console.log`).
 
 ## General JP→EN "look out for" traps
 
@@ -108,5 +135,16 @@ don't repeat. "Look out for" items are general JP→EN traps.
   numeric/ID tokens.
 - **Width budgets:** keep lines within the engine's text box or it clips/wraps
   badly; re-flow after translation, not before.
+- **Deictic pronouns need the scene, not the word.** こちら = "this side" = usually
+  *me* (the speaker); 俺たち/私たち = *us*. The same file can hold a wrong "us" and a
+  right one; decide per line who is actually present and what person the narrator
+  uses — dictionary meaning alone is not enough.
+- **Subject-dropping feeling words are calques.** Japanese leaves the subject
+  implicit and feels intransitive (うれしかたです, 好き, 夢中になって): make the
+  subject explicit in EN — "I was really happy", not "it was happy"; and test the
+  result for natural register ("completely absorbed", not "with total absorption").
+- **Baked-in state:** anything displayed from save data (scene/label names, window
+  caption, restored menu captions) must be checked against the *save file*, not
+  just source files — old saves outlive your patch.
 - **Don't translate what isn't shown:** error/debug/internal strings stay as-is
   unless the user asks.

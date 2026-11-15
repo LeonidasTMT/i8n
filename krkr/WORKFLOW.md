@@ -1,6 +1,6 @@
 # KiriKiri translation workflow (extract → translate → verify → repack → ship)
 
-Proven end-to-end on a 24-entry `patch.xp3`. Every step has a tool in
+Proven end-to-end on a 25-entry `patch.xp3`. Every step has a tool in
 [`tools/`](tools/) and a verification gate. The invariant throughout: **only the
 bytes you intended change, and you can prove it.**
 
@@ -24,6 +24,28 @@ Inventory questions to answer before translating anything:
 - Which story files exist (count them — you'll assert the count later)?
 - Are there scenario `.ks` that show visible UI (title, menus, CG mode…)?
 - Is there a `system/` tree whose files we'd shadow at root level?
+
+Where player-visible strings live in a KAG game (check all of these, not just story files):
+- `system/Menus.tjs` — every menu-bar caption (`KAGMenuItem(this, "…(&X)", …)`),
+  including second-level items (e.g. Clear Text Window) that only appear under a
+  dropdown.
+- Scenario `.ks` — `[button … hint="…"]` tooltips, `[link]…[endlink]` text, and any
+  custom toolbar/ribbon built from tags.
+- **Runtime overrides:** tags can rename UI at runtime — e.g. `[rclick name="…"]`
+  re-captions the right-click menu item. Grep `.txt`/`.ks` for tag attributes that
+  carry display text before concluding where a string lives.
+- **Label display-name markers in story `.txt`:** KAG2 label definition lines can
+  carry a display name (`*label|Display Name`). These feed save/load menus and
+  bookmark captions, and get baked into saves at save time — untranslated marker
+  lines show up as JP scene names even when every prose line is translated.
+- **`system/Config.tjs`:** `System.title = "…"` sets the always-visible window
+  caption; it also gets baked into every save (and into `data999.ksd`, which the
+  engine rewrites on clean exit — so the live title there is a free runtime check
+  that your Config.tjs patch actually took effect). Trap: lines like
+  `;System.title = "…";` are **active TJS** (semicolon = statement terminator),
+  not comments — only `//` and `/* */` are comments. Don't skip a string because
+  the line starts with `;`. Config files that look mostly commented-out are
+  usually full of live one-line statements.
 
 ## 2. Classify (scope)
 
@@ -123,6 +145,58 @@ cp analysis/patch_new.xp3 GAME/patch.xp3
 
 Then **re-verify from disk** the file you actually installed (entry count, CP932,
 spot-checks). Never trust a build you didn't re-read after copying.
+
+## 8. Save data & bookmarks: serialized state outlives your patch
+
+All KAG2 save containers share one layout: **[optional BMP thumbnail] + a
+21-byte header + a zlib stream of UTF-16LE TJS text**. The header sits
+*immediately before* the stream:
+
+  ```
+  offset 0-3:   magic fe fe 02 ff
+  offset 4:    0xfe
+  offset 5-8:   int32 LE = compressed stream size
+  offset 9-12:  zero
+  offset 13-16: int32 LE = decompressed payload size
+  offset 17-20: zero
+  ```
+
+Two file families differ only in what precedes the header:
+
+- **Bookmark files** (`dataN.bmp`, `data999.ksd`): a BMP thumbnail (in this
+  game the header starts at byte 112950, stream at 112971 — the loader's fixed
+  `o<offset>` mode), then header + stream. Serialized at save time: current
+  page/label display name, window caption, right-click menu captions.
+- **System variable files** (`datasu.ksd`, `datasc.ksd`): header + stream from
+  byte 0 (no thumbnail).
+
+The engine reads exactly the declared byte counts, so **any payload rewrite
+must update both size fields in the header right before the new stream** —
+otherwise startup dies with
+  「システム変数データが壊れています」(system variable data corrupted). `datasc.ksd`
+  persists `bookMarkNames`/`bookMarkDates` (the load-screen scene names); the
+  engine rewrites both system files on clean exit, which also self-heals
+  `bookMarkNames` from each bookmark's current display name.
+
+Consequences:
+
+- **Old saves keep old strings.** Saves made before the patch show JP scene names,
+  captions, or menu items *after loading*, even when every source file is
+  translated. This is state, not a missing translation — check the save file
+  before re-translating anything.
+- **Fix in place if needed:** back up `savedata/` first. Find the stream
+  (`0x789c`; can false-positive inside image data), check that the 21 bytes
+  *before* it are the header (magic + sizes matching the actual stream), inflate,
+  replace exact UTF-16LE strings, `zlib.compress`, and write back **prefix +
+  rebuilt header (new compressed/decompressed sizes) + new stream** — keeping
+  any trailing bytes after the original stream if there were any. Verify by
+  parsing the way the loader does — magic, both declared sizes vs actual,
+  inflate from disk, assert zero CJK left — then boot-test the game (a startup
+  exception writes to `savedata/krkr.console.log`).
+- **Or just document it:** old saves keep old names until re-saved; new saves pick
+  up current display names automatically.
+- Don't touch functional values inside saves (font face names, IDs, flags) — only
+  human-readable strings.
 
 ## Backups: one per stage
 
