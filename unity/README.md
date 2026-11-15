@@ -4,6 +4,10 @@ Engine-agnostic doctrine lives in `../TRANSLATION.md`. This folder is the
 **Unity / Mono** specifics: where text is stored, and how to deliver English two
 different ways — *live* (runtime mod) vs *native* (baked into the game files).
 
+> Proven end-to-end on a full JP→EN **native build** of a commercial Mono Unity
+> game (≈2,800 asset string fields + scenario TextAsset CSVs + managed DLL `#US`
+> strings), shipped with no runtime mod. See `WORKFLOW.md` for the stages.
+
 > Scope note: this covers **Mono** Unity builds (managed C# assemblies on disk).
 > **IL2CPP** builds strip the managed assemblies to native code — a different,
 > harder case not covered here.

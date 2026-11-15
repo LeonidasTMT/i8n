@@ -5,6 +5,9 @@
   CP932/Shift-JIS). No BOM. CJK stored as raw UTF-8 bytes, not `\uXXXX`.
 - If you emit any text sidecar (e.g., a translation table), use UTF-8 no BOM and run
   tools with UTF-8 stdout (`PYTHONIOENCODING=utf-8`) to avoid cp932 console mojibake.
+- **Terminal CJK mojibake is display-only** (cp932 console): a file can be perfect
+  while printing garbage. Verify integrity via codepoints/dataset-derived keys,
+  never by eye — and never eyeball CJK in the terminal to build match strings.
 
 ## The byte-length problem (the crux)
 - In UTF-8, a JP CJK character is **3 bytes**; an EN ASCII letter is **1 byte**. A
