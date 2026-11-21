@@ -1,0 +1,157 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "herai_ext/1.0.0": {
+        "dependencies": {
+          "AssetsTools.NET": "3.0.4",
+          "AssetsTools.NET.Cpp2IL": "3.0.4",
+          "AssetsTools.NET.MonoCecil": "3.0.4"
+        },
+        "runtime": {
+          "herai_ext.dll": {}
+        }
+      },
+      "AssetsTools.NET/3.0.4": {
+        "runtime": {
+          "lib/netstandard2.0/AssetsTools.NET.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.0.0"
+          }
+        }
+      },
+      "AssetsTools.NET.Cpp2IL/3.0.4": {
+        "dependencies": {
+          "AssetsTools.NET": "3.0.4",
+          "Samboy063.LibCpp2IL": "2022.0.7.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AssetsTools.NET.Cpp2IL.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "AssetsTools.NET.MonoCecil/3.0.4": {
+        "dependencies": {
+          "AssetsTools.NET": "3.0.4",
+          "Mono.Cecil": "0.11.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AssetsTools.NET.MonoCecil.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "IndexRange/1.0.0": {
+        "runtime": {
+          "lib/netstandard2.1/IndexRange.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Mono.Cecil/0.11.3": {
+        "runtime": {
+          "lib/netstandard2.0/Mono.Cecil.Mdb.dll": {
+            "assemblyVersion": "0.11.3.0",
+            "fileVersion": "0.11.3.0"
+          },
+          "lib/netstandard2.0/Mono.Cecil.Pdb.dll": {
+            "assemblyVersion": "0.11.3.0",
+            "fileVersion": "0.11.3.0"
+          },
+          "lib/netstandard2.0/Mono.Cecil.Rocks.dll": {
+            "assemblyVersion": "0.11.3.0",
+            "fileVersion": "0.11.3.0"
+          },
+          "lib/netstandard2.0/Mono.Cecil.dll": {
+            "assemblyVersion": "0.11.3.0",
+            "fileVersion": "0.11.3.0"
+          }
+        }
+      },
+      "Samboy063.LibCpp2IL/2022.0.7.2": {
+        "dependencies": {
+          "IndexRange": "1.0.0",
+          "Samboy063.WasmDisassembler": "2022.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/LibCpp2IL.dll": {
+            "assemblyVersion": "2022.0.7.0",
+            "fileVersion": "2022.0.7.0"
+          }
+        }
+      },
+      "Samboy063.WasmDisassembler/2022.0.2": {
+        "runtime": {
+          "lib/netstandard2.0/WasmDisassembler.dll": {
+            "assemblyVersion": "2022.0.2.0",
+            "fileVersion": "2022.0.2.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "herai_ext/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AssetsTools.NET/3.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NqYy5UIucwKwdkpamFTi8lr53hD+V8qQmbHzztQj1v4Pq1G4TjNlpkUWOhktTLBqBm4aPRaAkpFgB+3TDEuomw==",
+      "path": "assetstools.net/3.0.4",
+      "hashPath": "assetstools.net.3.0.4.nupkg.sha512"
+    },
+    "AssetsTools.NET.Cpp2IL/3.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-G2AU/nOSqHnDWRVa8WqAb9Pt8PaG5aJIdGgkTCgZ1iNoVvseOIqFHowMJYwWrYTT5gQ79Dqd4Ta7fx6cILDObw==",
+      "path": "assetstools.net.cpp2il/3.0.4",
+      "hashPath": "assetstools.net.cpp2il.3.0.4.nupkg.sha512"
+    },
+    "AssetsTools.NET.MonoCecil/3.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cWchJC+FR5h9ULKYFYPZL5zVBXRzKLBMQTNspQGH9pq4lXtwFTWd1QtOkX5HsHirGrmm651h/TfwrBZ2ru9PvA==",
+      "path": "assetstools.net.monocecil/3.0.4",
+      "hashPath": "assetstools.net.monocecil.3.0.4.nupkg.sha512"
+    },
+    "IndexRange/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6TgS1JLSUkpmPLfXBPaAgB39ZUix8E4soXWk2XSDcscVe84i1JKzIAtA7jHbRHSkOOrcr6YA0MpLCeq98y9mYQ==",
+      "path": "indexrange/1.0.0",
+      "hashPath": "indexrange.1.0.0.nupkg.sha512"
+    },
+    "Mono.Cecil/0.11.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DNYE+io5XfEE8+E+5padThTPHJARJHbz1mhbhMPNrrWGKVKKqj/KEeLvbawAmbIcT73NuxLV7itHZaYCZcVWGg==",
+      "path": "mono.cecil/0.11.3",
+      "hashPath": "mono.cecil.0.11.3.nupkg.sha512"
+    },
+    "Samboy063.LibCpp2IL/2022.0.7.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DpVeU0dQkUJCpbw0f1xKOG8vimdK2oYhrVABC7HDE3/ikGjhnMZd3i5b1joKDHZ+AiL90TWOaEXPcy24rCZ0dA==",
+      "path": "samboy063.libcpp2il/2022.0.7.2",
+      "hashPath": "samboy063.libcpp2il.2022.0.7.2.nupkg.sha512"
+    },
+    "Samboy063.WasmDisassembler/2022.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2uu+xBb7M3HKfBx9tAY6jiDieAf0hRnQjSmGX+7IdE6i24dYsx6TYgtrLvRx5lOuF2M8DijZ5H8yQ1pcuCs2SA==",
+      "path": "samboy063.wasmdisassembler/2022.0.2",
+      "hashPath": "samboy063.wasmdisassembler.2022.0.2.nupkg.sha512"
+    }
+  }
+}
