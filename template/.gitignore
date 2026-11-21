@@ -21,6 +21,10 @@ buildlog*.txt
 **/cur_extract.json
 **/post_extract.json
 
+# dashboard scratch (server logs, local backup copies)
+management/dashboard/server_*.log
+management/dashboard/project/units/*.bak
+
 # Windows: if a reserved-name file (nul/con/prn) ever gets created by a shell
 # redirect, remove it via the \\?\ extended path BEFORE `git add` — see
 # WORKSPACE.md.

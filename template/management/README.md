@@ -15,6 +15,9 @@ registers.
   - `contributors` / `validation_report` — who + integrity checks
 - Validation: a script that re-hashes and cross-checks every register;
   results land in `validation_report.csv`.
+- `dashboard/` — the local HTML dashboard app (stdlib-only Python + vanilla JS).
+  `python app/server.py --seed` once per project, then serve; commit the generated
+  store as provenance.
 - **Dashboard = projection of registers.** Build the UI from register data;
   commit the generated store as provenance so it's reproducible and diffable —
   never a separate source of truth.

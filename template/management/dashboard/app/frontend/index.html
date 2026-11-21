@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Translation Dashboard</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header>
+  <div class="brand"><span id="brandname">Translation project</span> <span class="sub">JP→EN translation dashboard</span></div>
+  <nav id="mainnav">
+    <a href="#/project" data-nav="project">Project</a>
+    <a href="#/units" data-nav="units">Units</a>
+    <a href="#/issues" data-nav="issues">Issues</a>
+    <a href="#/imports" data-nav="imports">Imports</a>
+    <a href="#/releases" data-nav="releases">Releases</a>
+  </nav>
+  <div class="searchbox">
+    <input id="globalsearch" type="text" placeholder="search JP / EN text… (Enter)" autocomplete="off">
+    <div id="searchresults" class="hidden"></div>
+  </div>
+</header>
+<main id="main"></main>
+<footer><span id="footstat"></span></footer>
+<script src="/app.js"></script>
+</body>
+</html>
