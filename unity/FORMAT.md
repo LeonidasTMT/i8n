@@ -1,7 +1,7 @@
 # Unity (Mono): where text lives
 
-Three containers hold player-visible strings. None is a loose overridable file,
-which is why there's no `patch.xp3`-style shadowing — you replace whole container files.
+Three containers hold player-visible strings. None is a loose overridable file —
+there's no file-by-file shadowing to do; you replace whole container files.
 
 ## 1. Managed assemblies — the `#US` heap
 - `<Game>_Data/Managed/*.dll` (e.g. `Assembly-CSharp.dll`) are .NET assemblies.

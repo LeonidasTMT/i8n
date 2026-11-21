@@ -1,8 +1,9 @@
 # Unity (Mono): encoding and the byte-length problem
 
 ## Encoding: UTF-8
-- Managed `#US` strings and asset-bundle strings are **UTF-8** (contrast KiriKiri's
-  CP932/Shift-JIS). No BOM. CJK stored as raw UTF-8 bytes, not `\uXXXX`.
+- Managed `#US` strings and asset-bundle strings are **UTF-8** (not the
+  CP932/Shift-JIS text files common in other JP engines). No BOM. CJK stored as
+  raw UTF-8 bytes, not `\uXXXX`.
 - If you emit any text sidecar (e.g., a translation table), use UTF-8 no BOM and run
   tools with UTF-8 stdout (`PYTHONIOENCODING=utf-8`) to avoid cp932 console mojibake.
 - **Terminal CJK mojibake is display-only** (cp932 console): a file can be perfect
@@ -17,8 +18,8 @@
   - **Same-offset, same-length in-place patch** works only when lengths match — rare.
   - Otherwise you must **rebuild the container**: rewrite the `#US` stream (and fix
     every referencing offset + assembly hash) or re-serialize the asset (and fix its
-    content hash). This is why Unity native-bake is far harder than KiriKiri's file
-    shadowing, where length changes are free.
+    content hash). This is why Unity native-bake is far harder than file-shadowing
+    patch models, where length changes are free.
 - Budget for this: per string you may need a container rebuild, not a byte swap.
 
 ## Overflow

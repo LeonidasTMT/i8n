@@ -10,8 +10,7 @@
   round-trip verify each rebuilt `#US` stream / re-serialized asset.
 - **Full-build asset delta = intended changes only.** Re-extract *every* file in
   the live build and diff field-by-field vs pristine: the delta must be exactly
-  your inject list, nothing else. This is the Unity analog of KiriKiri's
-  only-additions proof.
+  your inject list, nothing else — an only-additions proof.
 - **Structural audit**: type/method count probe on patched assemblies identical
   pre/post (e.g. 543 types / 3,833 methods). Catches stream rebuilds that ate or
   duplicated metadata.

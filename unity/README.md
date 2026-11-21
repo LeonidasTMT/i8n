@@ -17,15 +17,15 @@ different ways — *live* (runtime mod) vs *native* (baked into the game files).
 | Model | How it works | Pro | Con |
 |---|---|---|---|
 | **Live** (runtime mod) | A BepInEx plugin hooks Unity's text getters and swaps JP→EN after the string loads | Fast to build; no asset surgery; works today | "Live": replaced at runtime, not baked in; depends on loader+mod booting; not a plain file drop |
-| **Native** (baked) | Patch the source containers so the game's own files hold EN; ship a patched file set that replaces originals | No mod; appears native (the KiriKiri `patch.xp3` goal); portable | Hard: must rewrite serialized Unity data + managed DLLs; UTF-8 length changes break offsets/hashes |
+| **Native** (baked) | Patch the source containers so the game's own files hold EN; ship a patched file set that replaces originals | No mod; appears native — the game's own files hold EN; portable | Hard: must rewrite serialized Unity data + managed DLLs; UTF-8 length changes break offsets/hashes |
 
-**The native model is the target.** It's the Unity analog of KiriKiri's root-level
-`patch.xp3`: the game itself contains English, no runtime hook.
+**The native model is the target:** the game itself contains English, no runtime
+hook.
 
-## Why there's no `patch.xp3` equivalent in Unity
+## Why there's no file-by-file override in Unity
 
-KiriKiri text is loose files inside an archive you can shadow file-by-file. Unity
-text is **not** loose overridable files — it lives inside:
+Some engines keep script text as loose files inside an archive you can shadow
+file-by-file. Unity text is **not** loose overridable files — it lives inside:
 
 1. **Managed assemblies** (`<Game>_Data/Managed/*.dll`) — a `#US` string heap of
    literals (C# string constants, hardcoded UI text).
@@ -37,7 +37,7 @@ text is **not** loose overridable files — it lives inside:
 
 So "native" for Unity = produce a **patched file set** (replaced DLLs + replaced
 `.assets` + redrawn images) dropped into the game over the originals. That's the
-whole job — and it's what makes this harder than KiriKiri. See `FORMAT.md`,
+whole job — and it's what makes native Unity hard. See `FORMAT.md`,
 `ENCODING.md`, `WORKFLOW.md`.
 
 ## Layout
