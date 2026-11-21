@@ -76,6 +76,12 @@ Registers (source of truth, read-only inputs): `management/project_registers/*.c
   revisions are stored as a contiguous positional block per line inside the unit's
   JSONL; live appends carry an explicit `line_id`.
 - **Issue** = seeded QC finding (`qc_findings_register.csv`), linked to line/unit.
+- **Values vs state:** the store is canonical for WORKFLOW STATE (stage status, QC,
+  issues, revisions). Translation VALUES are canonical wherever your build bakes from
+  (the workspace's single source of truth — see the workspace AGENTS.md). They must
+  converge: after any value change, rebuild registers and `--reseed` (or apply the
+  same value live via POST), then verify the line shows the new EN. A value edited
+  only here is not done until it is mirrored back to the build source.
 
 ## Provenance rules (enforced in seed)
 
@@ -118,6 +124,8 @@ POST: `/api/line/{id}` (value edits), `/api/qc`, `/api/agent/submit`,
 `/api/issues` (+ `/{id}/status`, `/{id}/link`), `/api/imports/scan`,
 `/api/imports/{id}/apply|reject`, `/api/releases/run_acceptance`
 (runs `management/acceptance_tests.py`, stores result + log).
+
+POST contracts: `/api/agent/submit` takes `{actor, note, lines:[{line_id, tr?, ed?, raw?, mtl?, base_rev?}]}` and returns `{applied, noop, conflicts, not_found}` — `base_rev` is the line's current `rev` (optimistic concurrency; mismatch = conflict, never applied). `/api/line/{id}` takes `{tr?, ed?, raw?, mtl?, base_rev, actor, note}`.
 
 Frontend routes (hash): `#/project`, `#/units`, `#/unit/:uid`, `#/line/:lid`,
 `#/issues`, `#/imports`, `#/releases`. Global search box is top-right.
