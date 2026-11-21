@@ -45,3 +45,7 @@ Each subfolder is one engine family and contains:
    placeholders) — those are parsed by the engine, not displayed.
 5. **Verify by round-trip:** re-extract what you built and diff it against the
    original and against your previous known-good build.
+6. **Keep the workspace self-contained.** Any file the project requires lives in
+   the designated folders only; every scratch straggler must be deletable,
+   verify-run workdirs cleaned after GREEN, no game data or build artifacts in
+   git — see [WORKSPACE.md](WORKSPACE.md).
