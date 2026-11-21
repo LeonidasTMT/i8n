@@ -1,0 +1,26 @@
+# OS / editor junk
+Thumbs.db
+.DS_Store
+__pycache__/
+*.pyc
+
+# secret keys (public .pub may be committed; private never)
+work/deploy_key/id_ed25519
+
+# C# build artifacts (rebuild locally). Deliverable tool builds are the
+# exception: force-add that one Release dir on purpose and pin it by sha256.
+**/obj/
+*.user
+simerr*.txt
+buildlog*.txt
+
+# proprietary game data copies — never commit the game itself
+*_Data/
+
+# per-run derived extract dumps (regenerable; keep the small reports)
+**/cur_extract.json
+**/post_extract.json
+
+# Windows: if a reserved-name file (nul/con/prn) ever gets created by a shell
+# redirect, remove it via the \\?\ extended path BEFORE `git add` — see
+# WORKSPACE.md.
