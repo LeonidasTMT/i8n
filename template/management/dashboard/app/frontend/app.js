@@ -242,6 +242,7 @@ async function viewLine(lid) {
   const scat = Array.isArray(d.state_cat) ? (d.state_cat[0] || "") : (d.state_cat || "");
   const swhy = Array.isArray(d.state_cat) ? (d.state_cat[1] || "") : "";
   main.innerHTML = `
+    <a href="#/unit/${encodeURIComponent(d.unit_id)}" class="note">← unit</a>
     <div class="pager">
       <a class="btn" href="${d.context.prev ? `#/line/${esc(d.context.prev.line_id)}` : "#"}">${d.context.prev ? "← prev" : "← (start)"}</a>
       <span class="mono">${esc(lid)}</span>
