@@ -22,10 +22,9 @@ different ways — *live* (runtime mod) vs *native* (baked into the game files).
 **The native model is the target:** the game itself contains English, no runtime
 hook.
 
-## Why there's no file-by-file override in Unity
+## Where text lives — and why native means whole-file replacement
 
-Some engines keep script text as loose files inside an archive you can shadow
-file-by-file. Unity text is **not** loose overridable files — it lives inside:
+Unity text is **not** loose overridable files — it lives inside:
 
 1. **Managed assemblies** (`<Game>_Data/Managed/*.dll`) — a `#US` string heap of
    literals (C# string constants, hardcoded UI text).
